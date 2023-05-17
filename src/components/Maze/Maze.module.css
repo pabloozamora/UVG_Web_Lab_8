@@ -1,0 +1,4 @@
+.mazeContainer{
+    display: grid;
+    position: relative;
+}
