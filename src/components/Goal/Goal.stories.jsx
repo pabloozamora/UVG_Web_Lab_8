@@ -13,7 +13,7 @@ const Template = (args) => (
   </div>
 )
 
-export const AsPlayer = Template.bind({})
-AsPlayer.args = {
-  letter: 'g',
+export const AsGoalCity = Template.bind({})
+AsGoalCity.args = {
+  look: 'city',
 }

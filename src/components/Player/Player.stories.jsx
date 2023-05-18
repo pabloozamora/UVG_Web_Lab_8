@@ -15,5 +15,5 @@ const Template = (args) => (
 
 export const AsPlayer = Template.bind({})
 AsPlayer.args = {
-  letter: 'p',
+  currentSprite: 'front',
 }

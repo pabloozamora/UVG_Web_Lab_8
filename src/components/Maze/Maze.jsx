@@ -10,25 +10,26 @@ const Maze = ({ json, width, height }) => {
   const availableSpaces = ['2,2']
   let winSpace = ''
   const [position, setPosition] = useState({ row: 2, column: 2 })
+  const [playerSprite, setPlayerSprite] = useState('front')
   const [win, setWin] = useState(false)
   const handleKeyPressed = (e) => {
     if (!win && e.key === 'ArrowDown') {
-      // Cambiar sprite abajo
+      setPlayerSprite('front')
       if (availableSpaces.includes(`${position.row + 1},${position.column}`)) {
         setPosition((lastPosition) => ({ ...lastPosition, row: lastPosition.row + 1 }))
       }
     } else if (!win && e.key === 'ArrowUp') {
-      // Cambiar sprite arriba
+      setPlayerSprite('back')
       if (availableSpaces.includes(`${position.row - 1},${position.column}`)) {
         setPosition((lastPosition) => ({ ...lastPosition, row: lastPosition.row - 1 }))
       }
     } else if (!win && e.key === 'ArrowRight') {
-      // Cambiar sprite derecha
+      setPlayerSprite('right')
       if (availableSpaces.includes(`${position.row},${position.column + 1}`)) {
         setPosition((lastPosition) => ({ ...lastPosition, column: lastPosition.column + 1 }))
       }
     } else if (!win && e.key === 'ArrowLeft') {
-      // Cambiar sprite izquierda
+      setPlayerSprite('left')
       if (availableSpaces.includes(`${position.row},${position.column - 1}`)) {
         setPosition((lastPosition) => ({ ...lastPosition, column: lastPosition.column - 1 }))
       }
@@ -55,23 +56,27 @@ const Maze = ({ json, width, height }) => {
           case 'p':
             return (
               <>
-                <Player handleKeyPressed={handleKeyPressed} position={position} />
-                <Floor />
+                <Player
+                  handleKeyPressed={handleKeyPressed}
+                  position={position}
+                  currentSprite={playerSprite}
+                />
+                <Floor look="city"> </Floor>
               </>
             )
           case 'g':
             availableSpaces.push(`${indexRow + 1},${indexCol + 1}`)
             winSpace = `${indexRow + 1},${indexCol + 1}`
-            return <Goal />
+            return <Goal look="city" />
           case '|':
-            return <Wall type="|" />
+            return <Wall type="|" look="city" />
           case '-':
-            return <Wall type="-" />
+            return <Wall type="-" look="city" />
           case '+':
-            return <Wall type="+" />
+            return <Wall type="+" look="city" />
           case ' ':
             availableSpaces.push(`${indexRow + 1},${indexCol + 1}`)
-            return <Floor />
+            return <Floor look="city" />
           default:
             return null
         }

@@ -13,17 +13,8 @@ const Template = (args) => (
   </div>
 )
 
-export const AsCWall = Template.bind({})
-AsCWall.args = {
+export const AsWall = Template.bind({})
+AsWall.args = {
   type: '+',
-}
-
-export const AsVWall = Template.bind({})
-AsVWall.args = {
-  type: '|',
-}
-
-export const AsHWall = Template.bind({})
-AsHWall.args = {
-  type: '-',
+  look: 'city',
 }

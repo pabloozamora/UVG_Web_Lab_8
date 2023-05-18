@@ -13,5 +13,7 @@ const Template = (args) => (
   </div>
 )
 
-export const AsFloor = Template.bind({})
-AsFloor.args = {}
+export const AsFloorCity = Template.bind({})
+AsFloorCity.args = {
+  look: 'city',
+}
