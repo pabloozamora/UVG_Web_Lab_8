@@ -10,7 +10,7 @@ const MazePage = () => {
   }
 
   useEffect(() => {
-    getMaze(3, 3)
+    getMaze(5, 5)
   }, [])
 
   if (!mazeLayout) {
@@ -23,7 +23,7 @@ const MazePage = () => {
 
   return (
     <div className={styles.mazePageContainer}>
-      <Maze json={mazeLayout} width={3} height={3} />
+      <Maze json={mazeLayout} width={5} height={5} />
     </div>
   )
 }
