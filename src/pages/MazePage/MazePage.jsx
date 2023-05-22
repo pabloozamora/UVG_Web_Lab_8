@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Maze from '../../components/Maze/Maze'
 import styles from './MazePage.module.css'
 
-const MazePage = () => {
+const MazePage = ({ width, height }) => {
   const [mazeLayout, setMazeLayout] = useState(null)
-  const getMaze = async (width, height) => {
-    const response = await fetch(`https://maze.uvgenios.online/?type=json&w=${width}&h=${height}`)
+  const getMaze = async (w, h) => {
+    const response = await fetch(`https://maze.uvgenios.online/?type=json&w=${w}&h=${h}`)
     setMazeLayout(await response.json())
   }
 
   useEffect(() => {
-    getMaze(5, 5)
+    getMaze(width, height)
   }, [])
 
   if (!mazeLayout) {
     return (
       <div className={styles.mazePageContainer}>
-        Loading...
+        Cargando...
       </div>
     )
   }
 
   return (
     <div className={styles.mazePageContainer}>
-      <Maze json={mazeLayout} width={5} height={5} />
+      <Maze json={mazeLayout} width={width} height={height} look="city" />
     </div>
   )
 }
+
+MazePage.propTypes = { width: PropTypes.number.isRequired, height: PropTypes.number.isRequired }
 
 export default MazePage

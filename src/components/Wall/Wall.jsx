@@ -1,30 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import verticalWallCity from '../../assets/verticalWallCity.svg'
-import horizonalWallCity1 from '../../assets/horizontalWallCity1.svg'
+import verticalWallForest from '../../assets/verticalWallForest.svg'
+import horizonalWallCity from '../../assets/horizontalWallCity.svg'
+import horizontalWallForest from '../../assets/horizontalWallForest.svg'
 import cornerWallCity from '../../assets/cornerWallCity.svg'
+import cornerWallForest from '../../assets/cornerWallForest.svg'
 import styles from './Wall.module.css'
 
 const Wall = ({ type, look }) => {
   if (look === 'city') {
     if (type === '|') {
       return (
-        <div className={styles.verticalWallCity}>
-          <img alt="|" src={verticalWallCity} />
+        <div className={styles.verticalWall}>
+          <img alt="|" src={verticalWallForest} />
         </div>
       )
     }
     if (type === '-') {
       return (
         <div>
-          <img alt="-" src={horizonalWallCity1} />
+          <img alt="-" src={horizontalWallForest} />
         </div>
       )
     }
     if (type === '+') {
       return (
         <div>
-          <img alt="+" src={cornerWallCity} />
+          <img alt="+" src={cornerWallForest} />
         </div>
       )
     }

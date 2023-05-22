@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
   return (
-    <MazePage />
+    <MazePage width={5} height={5} />
   )
 }
 

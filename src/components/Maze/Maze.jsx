@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Player from '../Player/Player';
 import Goal from '../Goal/Goal';
@@ -6,7 +6,9 @@ import Wall from '../Wall/Wall'
 import Floor from '../Floor/Floor';
 import styles from './Maze.module.css'
 
-const Maze = ({ json, width, height }) => {
+const Maze = ({
+  json, width, height, look,
+}) => {
   const availableSpaces = ['2,2']
   let winSpace = ''
   const [position, setPosition] = useState({ row: 2, column: 2 })
@@ -61,22 +63,22 @@ const Maze = ({ json, width, height }) => {
                   position={position}
                   currentSprite={playerSprite}
                 />
-                <Floor look="city"> </Floor>
+                <Floor look={look}> </Floor>
               </>
             )
           case 'g':
             availableSpaces.push(`${indexRow + 1},${indexCol + 1}`)
             winSpace = `${indexRow + 1},${indexCol + 1}`
-            return <Goal look="city" />
+            return <Goal look={look} />
           case '|':
-            return <Wall type="|" look="city" />
+            return <Wall type="|" look={look} />
           case '-':
-            return <Wall type="-" look="city" />
+            return <Wall type="-" look={look} />
           case '+':
-            return <Wall type="+" look="city" />
+            return <Wall type="+" look={look} />
           case ' ':
             availableSpaces.push(`${indexRow + 1},${indexCol + 1}`)
-            return <Floor look="city" />
+            return <Floor look={look} />
           default:
             return null
         }
@@ -89,6 +91,7 @@ Maze.propTypes = {
   json: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  look: PropTypes.string.isRequired,
 }
 
 export default Maze
