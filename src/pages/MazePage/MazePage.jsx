@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Maze from '../../components/Maze/Maze'
 import styles from './MazePage.module.css'
+import loader from '../../assets/loader.svg'
 
 const MazePage = () => {
   const location = useLocation()
@@ -34,7 +35,8 @@ const MazePage = () => {
   if (!mazeLayout) {
     return (
       <div className={styles.mazePageContainer}>
-        Cargando...
+        <img alt="Cargando" src={loader} />
+        <p className={styles.loading}>Cargando</p>
       </div>
     )
   }
