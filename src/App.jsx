@@ -1,10 +1,14 @@
 import React from 'react'
-import MazePage from './pages/MazePage/MazePage'
-import './App.css'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Page from './pages'
 
 function App() {
   return (
-    <MazePage width={5} height={5} />
+    <div className="App">
+      <Router>
+        <Page />
+      </Router>
+    </div>
   )
 }
 

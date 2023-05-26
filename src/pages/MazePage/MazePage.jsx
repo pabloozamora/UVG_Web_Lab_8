@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Maze from '../../components/Maze/Maze'
 import styles from './MazePage.module.css'
 
-const MazePage = ({ width, height }) => {
+const MazePage = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [mazeLayout, setMazeLayout] = useState(null)
+  const [time, setTime] = useState(location.state.time)
   const getMaze = async (w, h) => {
     const response = await fetch(`https://maze.uvgenios.online/?type=json&w=${w}&h=${h}`)
     setMazeLayout(await response.json())
   }
 
+  const finish = (value) => {
+    navigate('/GameOverPage', { state: { win: value } })
+  }
+
   useEffect(() => {
-    getMaze(width, height)
+    if (location.state.timer && time > 0) {
+      setTimeout(() => {
+        setTime((oldTime) => (oldTime - 1))
+      }, 1000)
+    } else if (location.state.timer && time <= 0) {
+      navigate('/GameOverPage', { state: { win: false } })
+    }
+  }, [time])
+
+  useEffect(() => {
+    getMaze(location.state.width, location.state.height)
   }, [])
 
   if (!mazeLayout) {
@@ -24,11 +41,25 @@ const MazePage = ({ width, height }) => {
 
   return (
     <div className={styles.mazePageContainer}>
-      <Maze json={mazeLayout} width={width} height={height} look="city" />
+      {location.state.timer && (
+        <div className={styles.timerContainer}>
+          <div className={styles.timer}>
+            Tiempo restante
+            <br />
+            {new Date(time * 1000).toISOString().slice(14, 19)}
+          </div>
+        </div>
+      )}
+      <Maze
+        json={mazeLayout}
+        width={location.state.width}
+        height={location.state.height}
+        look={location.state.look}
+        character={location.state.character}
+        finish={finish}
+      />
     </div>
   )
 }
-
-MazePage.propTypes = { width: PropTypes.number.isRequired, height: PropTypes.number.isRequired }
 
 export default MazePage

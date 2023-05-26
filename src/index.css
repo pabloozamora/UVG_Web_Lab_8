@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/utendo');
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +7,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #ffe2a3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,9 +28,14 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('https://art.pixilart.com/9de93d00582a1d1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {

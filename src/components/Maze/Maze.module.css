@@ -1,4 +1,5 @@
 .mazeContainer{
     display: grid;
     position: relative;
+    background-color: #242424;
 }

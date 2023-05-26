@@ -7,7 +7,7 @@ import Floor from '../Floor/Floor';
 import styles from './Maze.module.css'
 
 const Maze = ({
-  json, width, height, look,
+  json, width, height, look, character, finish,
 }) => {
   const availableSpaces = ['2,2']
   let winSpace = ''
@@ -41,7 +41,7 @@ const Maze = ({
   useEffect(() => {
     if (`${position.row},${position.column}` === winSpace) {
       setWin(() => true)
-      setTimeout(() => alert('YAAAY'), 500)
+      setTimeout(() => finish(true), 500)
     }
   }, [position])
 
@@ -54,31 +54,34 @@ const Maze = ({
       }}
     >
       {json.map((row, indexRow) => row.map((col, indexCol) => {
+        const key = `${indexRow + 1},${indexCol + 1}`
         switch (col) {
           case 'p':
             return (
-              <>
+              <React.Fragment key={key}>
                 <Player
+                  key="player"
+                  character={character}
                   handleKeyPressed={handleKeyPressed}
                   position={position}
                   currentSprite={playerSprite}
                 />
-                <Floor look={look}> </Floor>
-              </>
+                <Floor key={key} look={look}> </Floor>
+              </React.Fragment>
             )
           case 'g':
             availableSpaces.push(`${indexRow + 1},${indexCol + 1}`)
             winSpace = `${indexRow + 1},${indexCol + 1}`
-            return <Goal look={look} />
+            return <Goal key={key} look={look} />
           case '|':
-            return <Wall type="|" look={look} />
+            return <Wall key={key} type="|" look={look} />
           case '-':
-            return <Wall type="-" look={look} />
+            return <Wall key={key} type="-" look={look} />
           case '+':
-            return <Wall type="+" look={look} />
+            return <Wall key={key} type="+" look={look} />
           case ' ':
             availableSpaces.push(`${indexRow + 1},${indexCol + 1}`)
-            return <Floor look={look} />
+            return <Floor key={key} look={look} />
           default:
             return null
         }
@@ -92,6 +95,8 @@ Maze.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   look: PropTypes.string.isRequired,
+  character: PropTypes.string.isRequired,
+  finish: PropTypes.func.isRequired,
 }
 
 export default Maze

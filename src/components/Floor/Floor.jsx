@@ -5,14 +5,19 @@ import floorCity from '../../assets/floorCity.svg'
 import floorForest from '../../assets/floorForest.svg'
 
 const Floor = ({ look }) => {
+  let floorSprite = null
   if (look === 'city') {
-    return (
-      <div className={styles.Floor}>
-        <img alt="" src={floorForest} />
-      </div>
-    )
+    floorSprite = floorCity
+  } else if (look === 'forest') {
+    floorSprite = floorForest
+  } else if (look === 'mountain') {
+    floorSprite = floorForest
   }
-  return <div> </div>
+  return (
+    <div className={styles.Floor}>
+      <img alt="" src={floorSprite} />
+    </div>
+  )
 }
 
 Floor.propTypes = { look: PropTypes.string.isRequired }

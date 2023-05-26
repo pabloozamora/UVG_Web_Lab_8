@@ -16,4 +16,6 @@ const Template = (args) => (
 export const AsPlayer = Template.bind({})
 AsPlayer.args = {
   currentSprite: 'front',
+  position: { row: 2, column: 2 },
+  character: 'samurai',
 }

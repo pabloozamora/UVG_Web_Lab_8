@@ -13,7 +13,7 @@ const Template = (args) => (
   </div>
 )
 
-export const AsGoalCity = Template.bind({})
-AsGoalCity.args = {
+export const AsGoal = Template.bind({})
+AsGoal.args = {
   look: 'city',
 }
